@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | Fortree Asset Management</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link href="../css/login.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="../img/tab-icon.png" type="x-icon" />
+  </head>
+  <body>
+    <div class="signup">
+      <form
+        action="login.html"
+        method="post"
+        target="_blank"
+        enctype="application/x-www-form-urlencoded"
+        id="myForm"
+      >
+        <h1>Sign Up</h1>
+        <div class="input-box">
+          <input
+            type="text"
+            placeholder="Username"
+            name="fullname"
+            id="username"
+          />
+          <i class="bx bxs-user"></i>
+          <span id="usernameError" style="color: red"></span>
+        </div>
+        <div class="input-box">
+          <input type="text" placeholder="Email" name="email" id="email" />
+          <i class="bx bxs-envelope"></i>
+          <span id="emailError" style="color: red"></span>
+        </div>
+        <div class="input-box">
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            id="password"
+          />
+          <i class="bx bxs-lock-alt"></i>
+          <span id="passwordError" style="color: red"></span>
+        </div>
+        <div class="input-box">
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            name="confirm-password"
+            id="confirmPassword"
+          />
+          <i class="bx bxs-lock"></i>
+          <span id="confirmpwError" style="color: red"></span>
+        </div>
+        <br />
+        <div class="remember">
+          <label
+            ><input type="checkbox" name="terms" />I agree to terms &
+            conditions</label
+          >
+        </div>
+        <button type="submit" class="btn">Sign Up</button>
+        <div class="register-link">
+          <p>Already have an account? <a href="./login.html">Sign In</a></p>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("myForm");
+
+        form.addEventListener("submit", function (event) {
+          clearErrors();
+
+          let error = true;
+
+          let username = document.getElementById("username").value.trim();
+          if (username === "") {
+            showError("usernameError", "Username is required!");
+            error = false;
+          }
+
+          let email = document.getElementById("email").value.trim();
+          const regx = /^([a-zA-Z0-9/._]+)@([a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$/;
+          if (email === "") {
+            showError("emailError", "Email is required!");
+            error = false;
+          } else if (!regx.test(email)) {
+            showError("emailError", "Invalid email!");
+            error = false;
+          }
+
+          let password = document.getElementById("password").value.trim();
+          if (password === "") {
+            showError("passwordError", "Password is required!");
+            error = false;
+          } else if (password.length < 7 && password !== "") {
+            showError(
+              "passwordError",
+              "Password must be at least 7 characters!"
+            );
+            error = false;
+          }
+
+          let confirmPassword = document
+            .getElementById("confirmPassword")
+            .value.trim();
+          if (confirmPassword === "") {
+            showError("confirmpwError", "Confirm Password is required!");
+            error = false;
+          } else if (password !== confirmPassword) {
+            showError(
+              "confirmpwError",
+              "Confirm Password must match  to password!"
+            );
+            error = false;
+          }
+
+          if (!error) {
+            event.preventDefault();
+          }
+        });
+
+        function showError(id, message) {
+          document.getElementById(id).textContent = message;
+        }
+
+        function clearErrors() {
+          const errorElements = [
+            "usernameError",
+            "emailError",
+            "passwordError",
+            "confirmpwError",
+          ];
+          errorElements.forEach((id) => {
+            document.getElementById(id).textContent = "";
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

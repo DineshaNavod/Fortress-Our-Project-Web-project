@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login | Fortree Asset Management</title>
+    <link href="../css/login.css" rel="stylesheet" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="../img/tab-icon.png" type="x-icon" />
+  </head>
+  <body>
+    <div class="login">
+      <form
+        action="./Dashboard-main-page.html"
+        target="_self"
+        enctype="application/x-www-form-urlencoded"
+        method="post"
+        id="myForm"
+      >
+        <h1>Login</h1>
+        <div class="input-box">
+          <input
+            type="text"
+            placeholder="username or email"
+            name="username"
+            id="username"
+          />
+          <i class="bx bxs-user"></i>
+          <span id="usernameError" style="color: red"></span>
+        </div>
+        <div class="input-box">
+          <input
+            type="password"
+            placeholder="password"
+            name="password"
+            id="password"
+            minlength="7"
+          />
+          <i class="bx bxs-lock-alt"></i>
+          <span id="passwordError" style="color: red"></span>
+        </div>
+        <div class="remember">
+          <label>
+            <input type="checkbox" value="remember" name="remember" />Remember
+            me
+          </label>
+          <a href="./forgot.html" target="_self">Forgot password</a>
+        </div>
+        <button type="submit" class="btn">Sign In</button>
+        <div class="register-link">
+          <p>Don't have an account? <a href="./sign up.html">Sign Up</a></p>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function validation(event) {
+        let username = document.getElementById("username").value.trim();
+        let errorSpan1 = document.getElementById("usernameError");
+
+        let password = document.getElementById("password").value.trim();
+        let errorSpan2 = document.getElementById("passwordError");
+
+        errorSpan1.innerText = ""; //   clear previous error messages //
+        errorSpan2.innerText = "";
+
+        let error = true;
+
+        if (username === "") {
+          errorSpan1.innerText = "Username is required!";
+          error = false;
+        }
+        if (password === "") {
+          errorSpan2.innerText = "Password is required!";
+          error = false;
+        } else if (password.length < 7 && password !== "") {
+          errorSpan2.innerText = "Password must be at least 7 characters!";
+          error = false;
+        }
+
+        if (!error) {
+          event.preventDefault();
+        }
+      }
+
+      document.getElementById("myForm").addEventListener("submit", validation);
+    </script>
+  </body>
+</html>
